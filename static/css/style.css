@@ -1,0 +1,105 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f8f5ef;
+    color: #1f1f1f;
+    line-height: 1.6;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.site-header {
+    width: 100%;
+    border-bottom: 1px solid #ddd6ca;
+    background: #f8f5ef;
+}
+
+.navbar {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px 24px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo {
+    font-size: 1.25rem;
+    font-weight: 700;
+}
+
+.nav-links {
+    display: flex;
+    gap: 28px;
+}
+
+.nav-links a {
+    font-size: 0.95rem;
+}
+
+.nav-links a:hover {
+    opacity: 0.6;
+}
+
+main {
+    min-height: 80vh;
+}
+
+.site-footer {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 30px 24px;
+
+    border-top: 1px solid #ddd6ca;
+    font-size: 0.9rem;
+}
+
+
+.hero {
+    min-height: 70vh;
+
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 80px 24px;
+
+    display: flex;
+    align-items: center;
+}
+
+.hero-content {
+    max-width: 750px;
+}
+
+.hero-content > p:first-child {
+    margin-bottom: 20px;
+
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+}
+
+.hero h1 {
+    margin-bottom: 24px;
+
+    font-size: clamp(3rem, 7vw, 6.5rem);
+    line-height: 0.95;
+    letter-spacing: -0.04em;
+}
+
+.hero p:last-child {
+    max-width: 550px;
+    font-size: 1.1rem;
+}
