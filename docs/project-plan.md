@@ -97,3 +97,26 @@ Search improvements
 OpenStreetMap
 AI
 etc.
+
+
+// Current stack
+
+Backend
+Django
+
+Database
+SQLite → PostgreSQL later
+
+Frontend
+Django Templates
+Tailwind CSS
+JavaScript
+
+Map
+SVG India Map → OpenStreetMap later
+
+AI
+Later
+
+Content
+Research + structured data + possible automation later

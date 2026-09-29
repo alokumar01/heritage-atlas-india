@@ -1,0 +1,195 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+    {{ state.name }} | Heritage Atlas India
+{% endblock %}
+
+
+{% block content %}
+
+<section class="state-page">
+
+    <!-- State Introduction -->
+    <section class="state-hero">
+
+        {% if state.image %}
+            <img
+                src="{{ state.image.url }}"
+                alt="{{ state.name }}"
+            >
+        {% endif %}
+
+        <div>
+            <p>EXPLORE INDIA</p>
+
+            <h1>{{ state.name }}</h1>
+
+            <p>
+                {{ state.short_description }}
+            </p>
+        </div>
+
+    </section>
+
+
+    <!-- About -->
+    <section class="state-section">
+
+        <p>ABOUT</p>
+
+        <h2>Discover {{ state.name }}</h2>
+
+        <p>
+            {{ state.description }}
+        </p>
+
+    </section>
+
+
+    <!-- Heritage -->
+    <section class="state-section">
+
+        <p>HERITAGE</p>
+
+        <h2>Heritage Places</h2>
+
+        {% for place in heritage_places %}
+
+            <article>
+                <h3>{{ place.name }}</h3>
+
+                {% if place.city %}
+                    <p>{{ place.city }}</p>
+                {% endif %}
+
+                <p>
+                    {{ place.short_description }}
+                </p>
+            </article>
+
+        {% empty %}
+
+            <p>No heritage places added yet.</p>
+
+        {% endfor %}
+
+    </section>
+
+
+    <!-- Festivals -->
+    <section class="state-section">
+
+        <p>TRADITIONS</p>
+
+        <h2>Festivals</h2>
+
+        {% for festival in festivals %}
+
+            <article>
+                <h3>{{ festival.name }}</h3>
+
+                <p>
+                    {{ festival.short_description }}
+                </p>
+            </article>
+
+        {% empty %}
+
+            <p>No festivals added yet.</p>
+
+        {% endfor %}
+
+    </section>
+
+
+    <!-- Arts & Crafts -->
+    <section class="state-section">
+
+        <p>ART & CRAFT</p>
+
+        <h2>Arts & Crafts</h2>
+
+        {% for art in arts_crafts %}
+
+            <article>
+                <h3>{{ art.name }}</h3>
+
+                <p>
+                    {{ art.short_description }}
+                </p>
+            </article>
+
+        {% empty %}
+
+            <p>No arts or crafts added yet.</p>
+
+        {% endfor %}
+
+    </section>
+
+
+    <!-- Food -->
+    <section class="state-section">
+
+        <p>CUISINE</p>
+
+        <h2>Food</h2>
+
+        {% for food in foods %}
+
+            <article>
+                <h3>{{ food.name }}</h3>
+
+                <p>
+                    {{ food.short_description }}
+                </p>
+            </article>
+
+        {% empty %}
+
+            <p>No food items added yet.</p>
+
+        {% endfor %}
+
+    </section>
+
+
+    <!-- Historical Events -->
+    <section class="state-section">
+
+        <p>HISTORY</p>
+
+        <h2>Historical Events</h2>
+
+        {% for event in historical_events %}
+
+            <article>
+
+                <h3>{{ event.title }}</h3>
+
+                {% if event.year %}
+                    <p>{{ event.year }}</p>
+                {% endif %}
+
+                {% if event.location %}
+                    <p>{{ event.location }}</p>
+                {% endif %}
+
+                <p>
+                    {{ event.short_description }}
+                </p>
+
+            </article>
+
+        {% empty %}
+
+            <p>No historical events added yet.</p>
+
+        {% endfor %}
+
+    </section>
+
+</section>
+
+{% endblock %}
