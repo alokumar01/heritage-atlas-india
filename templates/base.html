@@ -1,0 +1,47 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>
+        {% block title %}
+        Heritage Atlas India
+        {% endblock %}
+    </title>
+
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+
+<body>
+
+    <header class="site-header">
+        <nav class="navbar">
+            <a href="{% url 'home' %}" class="logo">
+                Heritage Atlas India
+            </a>
+
+            <div class="nav-links">
+                <a href="{% url 'home' %}">Home</a>
+                <a href="{% url 'about' %}">About</a>
+            </div>
+        </nav>
+    </header>
+
+
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+
+
+    <footer class="site-footer">
+        <p>Heritage Atlas India</p>
+    </footer>
+
+</body>
+
+</html>

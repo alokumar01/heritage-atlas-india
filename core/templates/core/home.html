@@ -1,13 +1,30 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Heritage Atlas India</title>
-</head>
-<body>
+{% extends 'base.html' %}
 
-    <h1>Heritage Atlas India</h1>
-    <p>Explore India's heritage, culture, history and traditions.</p>
+{% block title %}
+Home | Heritage Atlas India
+{% endblock %}
 
-</body>
-</html>
+
+{% block content %}
+
+<section class="hero">
+
+    <div class="hero-content">
+
+        <p>HERITAGE ATLAS INDIA</p>
+
+        <h1>
+            Explore the heritage,
+            culture and stories of India.
+        </h1>
+
+        <p>
+            Discover India's states, traditions, arts,
+            history, food, festivals and heritage.
+        </p>
+
+    </div>
+
+</section>
+
+{% endblock %}
