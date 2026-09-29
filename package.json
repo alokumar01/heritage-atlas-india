@@ -1,0 +1,28 @@
+{
+  "name": "heritage-atlas-india",
+  "version": "1.0.0",
+  "description": "A digital platform for exploring India's cultural heritage, history, traditions, arts, food, festivals and important heritage locations through state-wise exploration.",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "dev": "npx @tailwindcss/cli -i ./static/src/input.css -o ./static/css/style.css --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alokumar01/heritage-atlas-india.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/alokumar01/heritage-atlas-india/issues"
+  },
+  "homepage": "https://github.com/alokumar01/heritage-atlas-india#readme",
+  "dependencies": {
+    "@tailwindcss/cli": "^4.3.3",
+    "tailwindcss": "^4.3.3"
+  }
+}
