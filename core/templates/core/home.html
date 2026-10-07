@@ -1,27 +1,354 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}
-Home | Heritage Atlas India
+Heritage Atlas India | Explore India's Heritage
 {% endblock %}
-
 
 {% block content %}
 
-<section class="hero">
+<!-- HERO -->
 
-    <div class="hero-content">
+<section class="relative min-h-[75vh] overflow-hidden bg-stone-950 text-white sm:min-h-[80vh] lg:min-h-screen">
 
-        <p>HERITAGE ATLAS INDIA</p>
+    <!-- BACKGROUND IMAGE -->
+    <img
+        src="{% static 'images/home-hero.jpeg' %}"
+        alt="Indian heritage"
+        class="absolute inset-0 h-full w-full object-cover"
+    >
 
-        <h1>
-            Explore the heritage,
-            culture and stories of India.
-        </h1>
+    <!-- OVERLAY -->
 
-        <p>
-            Discover India's states, traditions, arts,
-            history, food, festivals and heritage.
+    <div class="absolute inset-0 bg-black/60"></div>
+    <div class="absolute inset-0 bg-gradient-to-r from-black/90 via-black/55 to-black/20"></div>
+
+
+    <!-- CONTENT -->
+
+    <div class="relative mx-auto flex min-h-[75vh] max-w-7xl items-end px-6 py-20 sm:min-h-[80vh] sm:py-28 lg:px-8">
+
+        <div class="max-w-5xl">
+
+            <div class="inline-flex items-center rounded-full border border-white/20 bg-white/10 px-4 py-2 text-xs font-medium uppercase tracking-[0.25em] text-stone-200 backdrop-blur-md">
+                Heritage Atlas India
+            </div>
+
+            <h1 class="max-w-4xl text-5xl font-semibold tracking-tight text-white sm:text-6xl lg:text-8xl">
+                Discover
+                <span class="text-orange-400">India.</span>
+            </h1>
+
+            <p class="mt-8 max-w-2xl text-base leading-7 text-stone-200 sm:text-xl sm:leading-8">
+                Explore the places, traditions, stories, arts,
+                festivals and flavours that shape India's cultural identity.
+            </p>
+
+            <div class="mt-10 flex flex-col gap-4 sm:flex-row">
+
+                <a
+                    href="{% url 'explore' %}"
+                    class="inline-flex items-center justify-center rounded-full bg-orange-700 px-7 py-4 text-sm font-semibold text-white transition duration-300 hover:-translate-y-0.5 hover:bg-orange-600"
+                >
+                    Explore India
+                    <span class="ml-2">→</span>
+                </a>
+
+                <a
+                    href="#states"
+                    class="inline-flex items-center justify-center rounded-full border border-white/30 bg-white/5 px-7 py-4 text-sm font-medium text-white backdrop-blur-sm transition duration-300 hover:bg-white/10"
+                >
+                    Discover states
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- INTRODUCTION -->
+
+<section class="mx-auto max-w-7xl px-6 py-16 sm:py-20 lg:px-8 lg:py-24">
+
+    <div class="grid gap-12 lg:grid-cols-[1fr_2fr] lg:gap-20">
+        <div>
+            <p class="text-xs font-semibold uppercase tracking-[0.25em] text-orange-700">
+                A living heritage
+            </p>
+
+            <h2 class="mt-4 text-4xl font-semibold tracking-tight sm:text-5xl">
+                More than places.
+                <br>
+                More than history.
+            </h2>
+
+        </div>
+
+        <div>
+
+            <p class="text-lg leading-8 text-stone-600 sm:text-xl">
+                India's heritage lives in its monuments, celebrations,
+                craftsmanship, cuisine, stories and everyday traditions.
+                Heritage Atlas brings these experiences together in one
+                digital journey across the country.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- STATES -->
+
+<section
+    id="states"
+    class="scroll-mt-24 bg-[#f7f3eb] py-16 sm:py-20 lg:py-24"
+    >
+
+    <div class="mx-auto max-w-7xl px-6 lg:px-8">
+
+        <div class="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
+
+            <div>
+
+                <p class="text-xs font-semibold uppercase tracking-[0.25em] text-orange-700">
+                    Explore India
+                </p>
+
+                <h2 class="mt-4 text-4xl font-semibold tracking-tight sm:text-5xl">
+                    Start with a state.
+                </h2>
+
+                <p class="mt-4 max-w-2xl text-stone-600">
+                    Every state carries a distinct story shaped by
+                    centuries of culture and tradition.
+                </p>
+
+            </div>
+
+            <a
+                href="{% url 'explore' %}"
+                class="text-sm font-medium text-stone-900 transition hover:text-orange-700"
+            >
+                View all states →
+            </a>
+
+        </div>
+
+
+        <div class="mt-12 grid gap-5 sm:gap-6 sm:grid-cols-2 lg:grid-cols-3">
+
+            {% for state in states|slice:":6" %}
+
+                <a
+                    href="{% url 'state_detail' state.slug %}"
+                    class="group relative min-h-[380px] overflow-hidden rounded-[2rem] bg-stone-900 shadow-sm transition duration-500 hover:-translate-y-2 hover:shadow-2xl"
+                >
+
+                <!-- IMAGE -->
+
+                {% if state.image %}
+
+                    <img
+                        src="{{ state.image.url }}"
+                        alt="{{ state.name }}"
+                        loading="lazy"
+                        class="absolute inset-0 h-full w-full object-cover transition duration-700 ease-out group-hover:scale-110"
+                    >
+
+                {% else %}
+
+                    <div class="absolute inset-0 bg-gradient-to-br from-stone-800 via-stone-700 to-orange-900"></div>
+
+                {% endif %}
+
+
+                <!-- DARK OVERLAY -->
+
+                <div class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent"></div>
+
+
+                <!-- HOVER OVERLAY -->
+
+                <div class="absolute inset-0 bg-orange-900/0 transition duration-500 group-hover:bg-orange-900/10"></div>
+
+
+                <!-- CONTENT -->
+
+                <div class="absolute inset-x-0 bottom-0 p-7 sm:p-8">
+
+                    {% if state.region %}
+
+                        <span class="inline-flex rounded-full border border-white/20 bg-black/20 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.2em] text-orange-300 backdrop-blur-sm">
+                            {{ state.region }}
+                        </span>
+
+                    {% endif %}
+
+                    <h3 class="mt-4 text-3xl font-semibold tracking-tight text-white sm:text-4xl">
+                        {{ state.name }}
+                    </h3>
+
+                    {% if state.short_description %}
+
+                        <p class="mt-3 max-w-md text-sm leading-6 text-stone-300">
+                            {{ state.short_description }}
+                        </p>
+
+                    {% endif %}
+
+                    <div class="mt-6 flex items-center justify-between">
+
+                        <span class="text-sm font-medium text-white">
+                            Explore state
+                        </span>
+
+                        <span
+                            class="flex h-10 w-10 items-center justify-center rounded-full border border-white/20 bg-white/10 text-white backdrop-blur-sm transition duration-300 group-hover:translate-x-1 group-hover:border-orange-400 group-hover:bg-orange-700"
+                        >
+                            →
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </a>
+
+            {% empty %}
+
+                <div class="rounded-3xl border border-dashed border-stone-300 p-10 sm:col-span-2 lg:col-span-3">
+
+                    <p class="text-lg font-medium">
+                        States are being added.
+                    </p>
+
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- EXPERIENCE -->
+
+<section class="bg-stone-950 text-white py-16 sm:py-20 lg:py-24">
+
+    <div class="mx-auto max-w-7xl px-6 lg:px-8">
+
+        <div class="max-w-3xl">
+            <p class="text-xs font-semibold uppercase tracking-[0.25em] text-orange-400">
+                Explore deeper
+            </p>
+
+            <h2 class="mt-4 text-4xl font-semibold tracking-tight sm:text-6xl">
+                Stories waiting to be discovered.
+            </h2>
+
+            <p class="mt-6 text-lg leading-8 text-stone-400">
+                From ancient heritage sites to living traditions,
+                explore the many layers of India's cultural landscape.
+            </p>
+
+        </div>
+
+
+        <div class="mt-16 grid gap-px overflow-hidden rounded-3xl border border-stone-800 bg-stone-800 sm:grid-cols-2 lg:grid-cols-4">
+            <div class="bg-stone-950 p-7 sm:p-8">
+                <p class="text-4xl font-semibold text-orange-500">01</p>
+
+                <h3 class="mt-8 text-xl font-semibold">
+                    Heritage
+                </h3>
+
+                <p class="mt-3 text-sm leading-6 text-stone-400">
+                    Discover monuments and places that preserve India's past.
+                </p>
+            </div>
+
+
+            <div class="bg-stone-950 p-7 sm:p-8">
+
+                <p class="text-4xl font-semibold text-orange-500">02</p>
+
+                <h3 class="mt-8 text-xl font-semibold">
+                    Traditions
+                </h3>
+
+                <p class="mt-3 text-sm leading-6 text-stone-400">
+                    Experience festivals and traditions passed through generations.
+                </p>
+
+            </div>
+
+
+            <div class="bg-stone-950 p-7 sm:p-8">
+
+                <p class="text-4xl font-semibold text-orange-500">03</p>
+
+                <h3 class="mt-8 text-xl font-semibold">
+                    Arts & Crafts
+                </h3>
+
+                <p class="mt-3 text-sm leading-6 text-stone-400">
+                    Explore the creativity and craftsmanship of Indian communities.
+                </p>
+
+            </div>
+
+
+            <div class="bg-stone-950 p-7 sm:p-8">
+
+                <p class="text-4xl font-semibold text-orange-500">04</p>
+
+                <h3 class="mt-8 text-xl font-semibold">
+                    Cuisine
+                </h3>
+
+                <p class="mt-3 text-sm leading-6 text-stone-400">
+                    Discover flavours and culinary traditions from across India.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- FINAL CTA -->
+
+<section class="bg-[#f7f3eb] py-16 sm:py-20 lg:py-24">
+
+    <div class="mx-auto max-w-7xl px-6 lg:px-8 text-center">
+
+        <p class="text-xs font-semibold uppercase tracking-[0.25em] text-orange-700">
+            Begin your journey
         </p>
+
+        <h2 class="mt-5 text-4xl font-semibold tracking-tight sm:text-6xl">
+            India's story is waiting.
+        </h2>
+
+        <p class="mx-auto mt-6 max-w-2xl text-lg leading-8 text-stone-600">
+            Choose a state and discover the heritage, culture
+            and traditions that make it unique.
+        </p>
+
+        <a
+            href="{% url 'explore' %}"
+            class="mt-10 inline-flex items-center rounded-full bg-stone-900 px-8 py-4 text-sm font-semibold text-white transition duration-300 hover:bg-orange-700"
+        >
+            Explore India →
+        </a>
 
     </div>
 

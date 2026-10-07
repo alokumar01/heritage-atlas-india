@@ -1,0 +1,245 @@
+{% extends 'base.html' %} {% block title %} Explore India | Heritage Atlas India
+{% endblock %} {% block content %}
+
+<section class="bg-stone-950 text-white">
+    <div class="mx-auto max-w-7xl px-6 py-24 lg:px-8">
+        <p class="text-xs font-semibold uppercase tracking-[0.3em] text-orange-400">
+            Heritage Atlas
+        </p>
+
+        <h1 class="mt-5 max-w-4xl text-5xl font-semibold tracking-tight sm:text-6xl lg:text-8xl">
+            Explore India.
+        </h1>
+
+        <p class="mt-8 max-w-2xl text-lg leading-8 text-stone-400">
+            Discover the states, cultures and heritage that shape India's identity.
+        </p>
+    </div>
+</section>
+
+<section class="mx-auto max-w-7xl px-6 py-20 lg:px-8">
+    <!-- SEARCH + FILTER -->
+
+    <div class="rounded-3xl border border-stone-200 bg-white p-5 shadow-sm sm:p-6">
+        <div class="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+            <!-- SEARCH -->
+
+            <form method="GET" action="{% url 'explore' %}" class="w-full lg:max-w-xl">
+                <label for="state-search"
+                    class="mb-2 block text-xs font-semibold uppercase tracking-[0.2em] text-stone-500">
+                    Search states
+                </label>
+
+                <div class="flex">
+                    <input id="state-search" type="search" name="q" value="{{ query }}"
+                        placeholder="Search by state name..."
+                        class="min-w-0 flex-1 rounded-l-full border border-stone-300 bg-stone-50 px-5 py-3.5 text-sm outline-none transition focus:border-orange-600 focus:ring-2 focus:ring-orange-600/10" />
+
+                    <button type="submit"
+                        class="rounded-r-full bg-stone-900 px-6 text-sm font-medium text-white transition hover:bg-orange-700">
+                        Search
+                    </button>
+                </div>
+            </form>
+
+            <!-- REGION -->
+
+            <form method="GET" action="{% url 'explore' %}" class="w-full lg:w-auto">
+                <label for="region-filter"
+                    class="mb-2 block text-xs font-semibold uppercase tracking-[0.2em] text-stone-500">
+                    Filter by region
+                </label>
+
+                <select id="region-filter" name="region" onchange="this.form.submit()"
+                    class="w-full rounded-full border border-stone-300 bg-stone-50 px-5 py-3.5 text-sm outline-none transition focus:border-orange-600 focus:ring-2 focus:ring-orange-600/10 lg:min-w-52">
+                    <option value="">All regions</option>
+
+                    {% for item in regions %}
+
+                    <option value="{{ item }}" {% if region == item %}selected{% endif %}>
+                        {{ item }}
+                    </option>
+
+                    {% endfor %}
+                </select>
+            </form>
+        </div>
+
+        {% if query or region %}
+
+        <div class="mt-5 flex flex-wrap items-center gap-3 border-t border-stone-100 pt-5">
+            <span class="text-xs text-stone-500"> Active filters: </span>
+
+            {% if query %}
+
+            <span class="rounded-full bg-stone-100 px-3 py-1 text-xs font-medium text-stone-700">
+                "{{ query }}"
+            </span>
+
+            {% endif %} {% if region %}
+
+            <span class="rounded-full bg-orange-50 px-3 py-1 text-xs font-medium text-orange-700">
+                {{ region }}
+            </span>
+
+            {% endif %}
+
+            <a href="{% url 'explore' %}" class="ml-auto text-xs font-medium text-orange-700 hover:text-orange-900">
+                Clear filters →
+            </a>
+        </div>
+
+        {% endif %}
+    </div>
+
+    <!-- INDIA MAP -->
+
+    <section class="mt-16 sm:mt-20">
+        <div class="mb-8">
+
+            <div class="flex items-center gap-3">
+
+                <span class="h-px w-8 bg-orange-700"></span>
+
+                <p class="text-xs font-semibold uppercase tracking-[0.25em] text-orange-700">
+                    Explore by Map
+                </p>
+
+            </div>
+
+            <h2 class="mt-4 text-4xl font-semibold tracking-tight sm:text-5xl">
+                India, state by state.
+            </h2>
+
+            <p class="mt-4 max-w-2xl text-stone-600">
+                Select a state directly from the map to begin exploring its heritage and culture.
+            </p>
+
+        </div>
+
+        {% include "components/india_map.html" %}
+    </section>
+
+    <!-- RESULT COUNT -->
+    <div class="mt-12 flex items-center justify-between border-y border-stone-200 py-5">
+
+        <p class="text-sm text-stone-500">
+
+            {% if query or region %}
+
+            Showing
+            <span class="font-semibold text-stone-900">
+                {{ states|length }}
+            </span>
+            result{{ states|length|pluralize }}
+
+            {% else %}
+
+            <span class="font-semibold text-stone-900">
+                {{ states|length }}
+            </span>
+            states to explore
+
+            {% endif %}
+
+        </p>
+
+        {% if query or region %}
+
+        <a href="{% url 'explore' %}" class="text-sm font-medium text-orange-700 transition hover:text-orange-900">
+            Reset →
+        </a>
+
+        {% endif %}
+
+    </div>
+
+    <!-- STATES -->
+
+    <div class="mt-20">
+        <div class="mb-8">
+            <p class="text-xs font-semibold uppercase tracking-[0.25em] text-orange-700">
+                Explore States
+            </p>
+
+            <h2 class="mt-3 text-4xl font-semibold tracking-tight">
+                Discover India's diversity.
+            </h2>
+
+            <p class="mt-3 max-w-2xl text-stone-600">
+                Explore the heritage, traditions, arts, food and history of each state.
+            </p>
+        </div>
+
+        <div class="grid gap-5 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3">
+            {% for state in states %}
+
+            <a href="{% url 'state_detail' state.slug %}"
+                class="group relative min-h-[360px] overflow-hidden rounded-[2rem] bg-gradient-to-br from-stone-800 via-stone-700 to-orange-900">
+                {% if state.image %}
+
+                <img src="{{ state.image.url }}" alt="{{ state.name }}" loading="lazy"
+                    class="absolute inset-0 h-full w-full object-cover transition duration-700 group-hover:scale-105" />
+
+                {% endif %}
+
+                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/25 to-transparent"></div>
+
+                <div class="absolute inset-0 bg-orange-900/0 transition duration-500 group-hover:bg-orange-900/10">
+                </div>
+
+                <div class="absolute inset-x-0 bottom-0 p-6 text-white sm:p-8">
+
+                    {% if state.region %}
+
+                    <span
+                        class="inline-flex rounded-full border border-white/20 bg-black/20 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.2em] text-orange-300 backdrop-blur-sm">
+                        {{ state.region }}
+                    </span>
+
+                    {% endif %}
+
+                    <h2 class="mt-4 text-3xl font-semibold tracking-tight">
+                        {{ state.name }}
+                    </h2>
+
+                    <p class="mt-3 line-clamp-2 text-sm leading-6 text-stone-300">
+                        {{ state.short_description }}
+                    </p>
+
+                    <div class="mt-6 flex items-center justify-between">
+
+                        <span class="text-sm font-medium">
+                            Explore state
+                        </span>
+
+                        <span
+                            class="flex h-10 w-10 items-center justify-center rounded-full border border-white/20 bg-white/10 backdrop-blur-sm transition duration-300 group-hover:translate-x-1 group-hover:border-orange-400 group-hover:bg-orange-700">
+                            →
+                        </span>
+
+                    </div>
+
+                </div>
+            </a>
+
+            {% empty %}
+
+            <div class="col-span-full rounded-2xl border border-dashed border-stone-300 p-10 text-center">
+                <p class="text-sm text-stone-500">
+                    No states found. Try another search.
+                </p>
+
+                <a href="{% url 'explore' %}" class="mt-6 inline-block text-sm font-medium text-orange-700">
+                    Clear filters →
+                </a>
+            </div>
+
+            {% endfor %}
+        </div>
+    </div>
+
+
+</section>
+
+{% endblock %}

@@ -1,47 +1,153 @@
 {% load static %}
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>
-        {% block title %}
-        Heritage Atlas India
-        {% endblock %}
-    </title>
+    <title>{% block title %} Heritage Atlas India {% endblock %}</title>
 
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
 </head>
 
-<body>
+<body class="bg-stone-50  text-stone-900 antialiased selection:bg-orange-200 selection:text-stone-900">
+    <!-- NAVBAR -->
+    <header class="sticky top-0 z-50 border-b border-stone-200/80 bg-[#f7f3eb]/90 backdrop-blur-xl">
+        <nav class="mx-auto flex h-20 max-w-7xl items-center justify-between px-6 lg:px-8">
+            <!-- LOGO -->
 
-    <header class="site-header">
-        <nav class="navbar">
-            <a href="{% url 'home' %}" class="logo">
-                Heritage Atlas India
+            <a href="{% url 'home' %}" class="text-lg font-semibold tracking-tight text-stone-900">
+                Heritage Atlas
             </a>
 
-            <div class="nav-links">
-                <a href="{% url 'home' %}">Home</a>
-                <a href="{% url 'about' %}">About</a>
+            <!-- DESKTOP NAV -->
+
+            <div class="hidden items-center gap-8 md:flex">
+
+                <a href="{% url 'home' %}" class="text-sm font-medium text-stone-600 transition hover:text-orange-700">
+                    Home
+                </a>
+
+                <a href="{% url 'explore' %}"
+                    class="text-sm font-medium text-stone-600 transition hover:text-orange-700">
+                    Explore
+                </a>
+
+                <a href="{% url 'about' %}" class="text-sm font-medium text-stone-600 transition hover:text-orange-700">
+                    About
+                </a>
+
             </div>
+
+            <!-- MOBILE BUTTON -->
+
+            <button
+                id="mobile-menu-button"
+                type="button"
+                class="flex h-10 w-10 items-center justify-center rounded-full border border-stone-200 text-stone-700 md:hidden"
+                onclick="document.getElementById('mobile-menu').classList.toggle('hidden')"
+                aria-label="Toggle navigation menu"
+            >
+                ☰
+            </button>
+
+            <!-- DESKTOP CTA -->
+
+            <a href="{% url 'explore' %}"
+                class="hidden rounded-full border border-stone-900 px-5 py-2.5 text-sm font-medium transition hover:bg-stone-900 hover:text-white md:block">
+                Explore India
+            </a>
         </nav>
+
+        <!-- MOBILE MENU -->
+        <div
+            id="mobile-menu"
+            class="hidden border-t border-stone-200 bg-stone-50 md:hidden"
+        >
+            <div class="mx-auto max-w-7xl px-6 py-5">
+
+                <div class="flex flex-col gap-2">
+
+                    <a
+                        href="{% url 'home' %}"
+                        class="rounded-xl px-4 py-3 text-sm font-medium text-stone-700 transition hover:bg-stone-100"
+                    >
+                        Home
+                    </a>
+
+                    <a
+                        href="{% url 'explore' %}"
+                        class="rounded-xl px-4 py-3 text-sm font-medium text-stone-700 transition hover:bg-stone-100"
+                    >
+                        Explore
+                    </a>
+
+                    <a
+                        href="{% url 'about' %}"
+                        class="rounded-xl px-4 py-3 text-sm font-medium text-stone-700 transition hover:bg-stone-100"
+                    >
+                        About
+                    </a>
+
+                </div>
+
+            </div>
+        </div>
     </header>
 
+    <!-- PAGE CONTENT -->
+    <main>{% block content %} {% endblock %}</main>
 
-    <main>
-        {% block content %}
-        {% endblock %}
-    </main>
+    <!-- FOOTER -->
+    <footer class="border-t border-stone-300 bg-stone-900 text-stone-300">
+        <div class="mx-auto max-w-7xl px-6 py-16 lg:px-8">
+            <div class="grid gap-12 md:grid-cols-3">
+                <div>
+                    <div class="text-xl font-bold text-white">Heritage Atlas India</div>
 
+                    <p class="mt-6 max-w-sm text-sm leading-7 text-stone-400">
+                        Explore India, state by state.
+                    </p>
+                </div>
 
-    <footer class="site-footer">
-        <p>Heritage Atlas India</p>
+                <div>
+                    <p class="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-stone-500">
+                        Navigate
+                    </p>
+
+                    <div class="flex flex-col items-start gap-3 text-sm">
+                        <a href="{% url 'home' %}" class="transition hover:text-white">
+                            Home
+                        </a>
+
+                        <a href="{% url 'explore' %}" class="transition hover:text-white">
+                            Explore
+                        </a>
+
+                        <a href="{% url 'about' %}" class="transition hover:text-white">
+                            About
+                        </a>
+                    </div>
+                </div>
+
+                <div>
+                    <p class="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-stone-500">
+                        Heritage Atlas
+                    </p>
+
+                    <p class="text-sm leading-7 text-stone-400">
+                        Discover the stories that make every part of India unique.
+                    </p>
+                </div>
+            </div>
+
+            <div class="mt-16 border-t border-stone-800 pt-6 text-xs text-stone-500">
+                © 2026 Heritage Atlas India
+            </div>
+        </div>
     </footer>
-
 </body>
 
 </html>

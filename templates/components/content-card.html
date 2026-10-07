@@ -1,0 +1,30 @@
+<article class="group flex h-full flex-col overflow-hidden rounded-3xl border border-stone-200 bg-white shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-lg">
+    {% if item.image %}
+        <img
+            src="{{ item.image.url }}"
+            alt="{{ item.name }}"
+            loading="lazy"
+            class="h-48 w-full object-cover transition duration-700 group-hover:scale-105 sm:h-56"
+        >
+    {% else %}
+        <div aria-hidden="true" class="h-48 shrink-0 bg-gradient-to-br from-stone-800 via-stone-700 to-orange-900 sm:h-56"></div>
+    {% endif %}
+
+    <div class="flex-1 p-7">
+
+        <h3 class="text-2xl font-semibold text-stone-900">
+            {{ item.name }}
+        </h3>
+
+        {% if item.city %}
+            <p class="mt-2 text-sm text-orange-700">
+                {{ item.city }}
+            </p>
+        {% endif %}
+
+        <p class="mt-4 text-sm leading-6 text-stone-600">
+            {{ item.short_description }}
+        </p>
+
+    </div>
+</article>

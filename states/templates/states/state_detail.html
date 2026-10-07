@@ -1,195 +1,550 @@
 {% extends 'base.html' %}
 
-
 {% block title %}
-    {{ state.name }} | Heritage Atlas India
+{{ state.name }} | Heritage Atlas India
 {% endblock %}
-
 
 {% block content %}
 
-<section class="state-page">
+<!-- BREADCRUMB -->
 
-    <!-- State Introduction -->
-    <section class="state-hero">
+<div class="border-b border-stone-200 bg-stone-50">
 
-        {% if state.image %}
-            <img
-                src="{{ state.image.url }}"
-                alt="{{ state.name }}"
+    <div class="mx-auto max-w-7xl px-6 py-4 lg:px-8">
+
+        <nav
+            aria-label="Breadcrumb"
+            class="flex items-center gap-2 text-sm text-stone-500"
             >
-        {% endif %}
 
-        <div>
-            <p>EXPLORE INDIA</p>
+            <a
+            href="{% url 'home' %}"
+            class="transition hover:text-stone-900"
+            >
+            Home
+        </a>
 
-            <h1>{{ state.name }}</h1>
+        <span class="text-stone-300">/</span>
 
-            <p>
-                {{ state.short_description }}
+        <a
+        href="{% url 'explore' %}"
+        class="transition hover:text-stone-900"
+        >
+                Explore
+            </a>
+
+            <span class="text-stone-300">/</span>
+
+            <span class="font-medium text-stone-900">
+                {{ state.name }}
+            </span>
+
+        </nav>
+
+    </div>
+
+</div>
+
+<!-- HERO -->
+<section class="relative overflow-hidden bg-stone-950 text-white border-b border-stone-200 py-16 sm:py-20 lg:py-24 min-h-[60vh] sm:min-h-[65vh] lg:min-h-[70vh]">
+    {% if state.image %}
+        <img
+            src="{{ state.image.url }}"
+            alt="{{ state.name }}"
+            class="absolute inset-0 h-full w-full object-cover object-center opacity-50"
+        >
+    {% endif %}
+
+    <div class="absolute inset-0 bg-gradient-to-r from-black/90 via-black/65 to-black/30">
+    </div>
+
+    <div class="relative mx-auto max-w-7xl px-6 lg:px-8">
+        <div class="max-w-4xl">
+
+            <div class="inline-flex items-center rounded-full border border-white/20 bg-white/10 px-3 py-1 text-xs font-medium text-stone-200 backdrop-blur-sm">
+                Explore India
+            </div>
+
+            <h1 class="text-5xl font-semibold tracking-tight text-white sm:text-7xl lg:text-9xl">
+                {{ state.name }}
+            </h1>
+
+            {% if state.short_description %}
+                <p class="mt-6 max-w-2xl text-base leading-7 text-stone-300 sm:mt-8 sm:text-lg sm:leading-8">
+                    {{ state.short_description }}
+                </p>
+            {% endif %}
+
+            <div class="mt-8 flex flex-wrap gap-3">
+
+                {% if state.capital %}
+
+                    <div class="rounded-full border border-white/15 bg-white/10 px-4 py-2 text-sm text-stone-200 backdrop-blur-sm">
+
+                        <span class="text-stone-400">
+                            Capital:
+                        </span>
+
+                        <span class="ml-1 font-medium text-white">
+                            {{ state.capital }}
+                        </span>
+
+                    </div>
+
+                {% endif %}
+
+
+                {% if state.region %}
+
+                    <div class="rounded-full border border-white/15 bg-white/10 px-4 py-2 text-sm text-stone-200 backdrop-blur-sm">
+
+                        <span class="text-stone-400">
+                            Region:
+                        </span>
+
+                        <span class="ml-1 font-medium text-white">
+                            {{ state.region }}
+                        </span>
+
+                    </div>
+
+                {% endif %}
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <a
+        href="{% url 'explore' %}"
+        class="mt-8 inline-flex items-center text-sm font-medium text-stone-300 transition hover:text-orange-400 focus:outline-none focus:ring-2 focus:ring-orange-600 focus:ring-offset-2"
+    >
+        ← Back to Explore
+    </a>
+
+</section>
+
+<!-- STATE NAVIGATION -->
+<nav aria-label="State sections" class="sticky top-0 z-40 border-b border-stone-200 bg-stone-50/95 backdrop-blur">
+    <div class="mx-auto max-w-7xl overflow-x-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex min-w-max gap-6 overflow-x-auto py-3 text-sm sm:py-4">
+
+            <a href="#about" class="whitespace-nowrap text-stone-600 transition hover:text-orange-700">
+                About
+            </a>
+
+            <a href="#heritage" class="whitespace-nowrap text-stone-600 transition hover:text-orange-700">
+                Heritage
+            </a>
+
+            <a href="#festivals" class="whitespace-nowrap text-stone-600 transition hover:text-orange-700">
+                Festivals
+            </a>
+
+            <a href="#arts" class="whitespace-nowrap text-stone-600 transition hover:text-orange-700">
+                Arts & Crafts
+            </a>
+
+            <a href="#food" class="whitespace-nowrap text-stone-600 transition hover:text-orange-700">
+                Food
+            </a>
+
+            <a href="#history" class="whitespace-nowrap text-stone-600 transition hover:text-orange-700">
+                History
+            </a>
+
+        </div>
+    </div>
+</nav>
+
+
+<!-- ABOUT -->
+
+<section id="about" class="scroll-mt-24 border-b border-stone-200 py-16 sm:py-20 lg:py-24">
+    <div class="mx-auto max-w-7xl px-6 lg:px-8">
+        <div class="grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20">
+
+            <div>
+                <p class="text-xs font-semibold uppercase tracking-[0.25em] text-orange-700">
+                    About {{ state.name }}
+                </p>
+
+                <h2 class="mt-4 text-3xl font-semibold tracking-tight text-stone-900 sm:text-4xl">
+                    A place shaped by stories.
+                </h2>
+            </div>
+
+            <div>
+                <p class="text-lg leading-8 text-stone-600 sm:text-xl sm:leading-9">
+                    {{ state.description }}
+                </p>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+<!-- HERITAGE -->
+
+<section id="heritage" class="scroll-mt-24 border-b border-stone-200 py-16 sm:py-20 lg:py-24">
+    <div class="mx-auto max-w-7xl px-6 lg:px-8">
+
+        <div class="mb-10 flex flex-col gap-4 sm:mb-12 sm:flex-row sm:items-end sm:justify-between">
+            <div>
+                <p class="text-xs font-semibold uppercase tracking-[0.25em] text-orange-700">
+                    Discover
+                </p>
+
+                <h2 class="mt-3 text-3xl font-semibold tracking-tight text-stone-900 sm:text-4xl">
+                    Heritage Places
+                </h2>
+            </div>
+
+            <p class="max-w-md text-sm leading-6 text-stone-500">
+                Explore places that preserve the history and identity of {{ state.name }}.
             </p>
         </div>
 
-    </section>
+        <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            {% for place in heritage_places %}
+                {% include 'components/content-card.html' with item=place %}
+            {% empty %}
+                <p class="col-span-full text-sm text-stone-500">
+                    Heritage places will be added soon.
+                </p>
+            {% endfor %}
+        </div>
+
+    </div>
+</section>
 
 
-    <!-- About -->
-    <section class="state-section">
+<!-- FESTIVALS -->
 
-        <p>ABOUT</p>
+<section id="festivals" class="scroll-mt-24 border-b border-stone-200 py-16 sm:py-20 lg:py-24">
+    <div class="mx-auto max-w-7xl px-6 lg:px-8">
 
-        <h2>Discover {{ state.name }}</h2>
+        <div class="mb-10 flex flex-col gap-4 sm:mb-12 sm:flex-row sm:items-end sm:justify-between">
+            <div>
+                <p class="text-xs font-semibold uppercase tracking-[0.25em] text-orange-700">
+                    Traditions
+                </p>
 
-        <p>
-            {{ state.description }}
+                <h2 class="mt-3 text-3xl font-semibold tracking-tight text-stone-900 sm:text-4xl">
+                    Festivals & Celebrations
+                </h2>
+            </div>
+
+            <p class="max-w-md text-sm leading-6 text-stone-500">
+                Experience the festivals and celebrations that preserve the traditions and cultural identity of {{ state.name }}.
+            </p>
+        </div>
+
+        <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            {% for festival in festivals %}
+                {% include 'components/content-card.html' with item=festival %}
+            {% empty %}
+                <div class="rounded-3xl border border-dashed border-stone-300 p-10 sm:col-span-2 lg:col-span-3">
+                    <p class="text-sm font-medium text-stone-500">
+                        Festivals
+                    </p>
+
+                    <p class="mt-2 text-lg font-medium text-stone-900">
+                        Traditions coming soon.
+                    </p>
+
+                    <p class="mt-2 text-sm leading-6 text-stone-500">
+                        Festivals and celebrations from {{ state.name }} will appear here.
+                    </p>
+                </div>
+            {% endfor %}
+        </div>
+
+    </div>
+</section>
+
+
+<!-- ART & CRAFT -->
+
+<section id="arts"
+    class="scroll-mt-24 border-b border-stone-200 py-16 sm:py-20 lg:py-24">
+
+    <div class="mx-auto max-w-7xl px-6 lg:px-8">
+
+        <div class="mb-10 flex flex-col gap-4 sm:mb-12 sm:flex-row sm:items-end sm:justify-between">
+            <div>
+                <p class="text-xs font-semibold uppercase tracking-[0.25em] text-orange-400">
+                    Art & Craft
+                </p>
+
+                <h2 class="mt-3 text-3xl font-semibold tracking-tight text-stone-900 sm:text-4xl">
+                    Creative traditions
+                </h2>
+            </div>
+
+            <p class="max-w-md text-sm leading-6 text-stone-400">
+                Discover the traditional arts and crafts that reflect the creativity and cultural heritage of {{ state.name }}.
+            </p>
+        </div>
+
+        <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+
+            {% for art in arts_crafts %}
+
+                <article
+                    class="group overflow-hidden rounded-3xl bg-stone-800 transition duration-500 hover:-translate-y-1 hover:bg-stone-700"
+                >
+
+                    {% if art.image %}
+                        <img
+                            src="{{ art.image.url }}"
+                            alt="{{ art.name }}"
+                            loading="lazy"
+                            class="h-48 w-full object-cover transition duration-700 group-hover:scale-105 sm:h-56"
+                        >
+                    {% else %}
+                        <div aria-hidden="true" class="h-48 bg-gradient-to-br from-stone-800 via-stone-700 to-orange-900 sm:h-56"></div>
+                    {% endif %}
+
+                    <div class="p-7">
+
+                        <h3 class="text-2xl font-semibold text-white">
+                            {{ art.name }}
+                        </h3>
+
+                        <p class="mt-4 text-sm leading-6 text-stone-300">
+                            {{ art.short_description }}
+                        </p>
+
+                    </div>
+
+                </article>
+
+            {% empty %}
+
+                <div class="rounded-3xl border border-dashed border-stone-700 p-10 sm:col-span-2 lg:col-span-3">
+
+                    <p class="text-sm font-medium text-stone-400">
+                        Arts & Crafts
+                    </p>
+
+                    <p class="mt-2 text-lg font-medium text-white">
+                        Creative traditions coming soon.
+                    </p>
+
+                    <p class="mt-2 text-sm leading-6 text-stone-400">
+                        Traditional arts and crafts from {{ state.name }} will appear here.
+                    </p>
+
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+</section>
+
+
+<!-- FOOD -->
+
+<section id="food" class="scroll-mt-24 border-b border-stone-200 py-16 sm:py-20 lg:py-24">
+    <div class="mx-auto max-w-7xl px-6 lg:px-8">
+
+        <div class="mb-10 flex flex-col gap-4 sm:mb-12 sm:flex-row sm:items-end sm:justify-between">
+            <div>
+                <p class="text-xs font-semibold uppercase tracking-[0.25em] text-orange-700">
+                    Cuisine
+                </p>
+
+                <h2 class="mt-3 text-3xl font-semibold tracking-tight text-stone-900 sm:text-4xl">
+                    Flavours of {{ state.name }}
+                </h2>
+            </div>
+
+            <p class="max-w-md text-sm leading-6 text-stone-500">
+                Discover the traditional flavours and dishes that make the cuisine of {{ state.name }} unique.
+            </p>
+        </div>
+
+        <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+
+            {% for food in foods %}
+
+                {% include 'components/content-card.html' with item=food %}
+
+            {% empty %}
+
+                <div class="rounded-3xl border border-dashed border-stone-300 p-10 sm:col-span-2 lg:col-span-3">
+
+                    <p class="text-sm font-medium text-stone-500">
+                        Cuisine
+                    </p>
+
+                    <p class="mt-2 text-lg font-medium text-stone-900">
+                        Flavours coming soon.
+                    </p>
+
+                    <p class="mt-2 text-sm leading-6 text-stone-500">
+                        Traditional food from {{ state.name }} will appear here.
+                    </p>
+
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+</section>
+
+
+<!-- HISTORY -->
+
+<section id="history" class="scroll-mt-24 border-b border-stone-200 bg-[#f7f3eb] py-16 sm:py-20 lg:py-24">
+    <div class="mx-auto max-w-7xl px-6 lg:px-8">
+
+        <div class="mb-10 flex flex-col gap-4 sm:mb-12 sm:flex-row sm:items-end sm:justify-between">
+            <div>
+                <p class="text-xs font-semibold uppercase tracking-[0.25em] text-orange-700">
+                    History
+                </p>
+
+                <h2 class="mt-3 text-3xl font-semibold tracking-tight text-stone-900 sm:text-4xl">
+                    Stories from the past
+                </h2>
+            </div>
+
+            <p class="max-w-md text-sm leading-6 text-stone-500">
+                Explore the important events and stories that shaped the history and identity of {{ state.name }}.
+            </p>
+        </div>
+
+        <div class="space-y-6">
+
+            {% for event in historical_events %}
+
+                <article class="rounded-3xl bg-white p-5 shadow-sm sm:p-7">
+
+                    <div class="grid gap-4 sm:gap-6 md:grid-cols-[160px_1fr]">
+
+                        <div>
+
+                            {% if event.image %}
+                                <img
+                                    src="{{ event.image.url }}"
+                                    alt="{{ event.title }}"
+                                    loading="lazy"
+                                    class="mb-4 h-36 w-full rounded-2xl object-cover"
+                                >
+                            {% endif %}
+
+                            {% if event.year %}
+                                <p class="text-2xl font-semibold text-orange-700">
+                                    {{ event.year }}
+                                </p>
+                            {% endif %}
+
+                            {% if event.location %}
+                                <p class="mt-2 text-sm text-stone-500">
+                                    {{ event.location }}
+                                </p>
+                            {% endif %}
+
+                        </div>
+
+                        <div>
+
+                            <h3 class="text-2xl font-semibold text-stone-900">
+                                {{ event.title }}
+                            </h3>
+
+                            <p class="mt-4 text-sm leading-7 text-stone-600">
+                                {{ event.short_description }}
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+            {% empty %}
+
+                <div class="rounded-3xl border border-dashed border-stone-300 bg-white p-10">
+
+                    <p class="text-sm font-medium text-stone-500">
+                        History
+                    </p>
+
+                    <p class="mt-2 text-lg font-medium text-stone-900">
+                        Historical stories coming soon.
+                    </p>
+
+                    <p class="mt-2 text-sm leading-6 text-stone-500">
+                        Important historical events from {{ state.name }} will appear here.
+                    </p>
+
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+</section>
+
+
+{% if previous_state or next_state %}
+<nav aria-label="Adjacent states" class="border-b border-stone-200 bg-stone-50">
+    <div class="mx-auto grid max-w-7xl grid-cols-2 gap-4 px-6 py-8 lg:px-8">
+        {% if previous_state %}
+            <a href="{% url 'state_detail' previous_state.slug %}" class="rounded-2xl border border-stone-200 bg-white p-5 transition hover:border-orange-300">
+                <span class="block text-xs font-semibold uppercase tracking-[0.2em] text-stone-500">Previous state</span>
+                <span class="mt-2 block font-semibold text-stone-900">{{ previous_state.name }}</span>
+            </a>
+        {% endif %}
+        {% if next_state %}
+            <a href="{% url 'state_detail' next_state.slug %}" class="rounded-2xl border border-stone-200 bg-white p-5 text-right transition hover:border-orange-300">
+                <span class="block text-xs font-semibold uppercase tracking-[0.2em] text-stone-500">Next state</span>
+                <span class="mt-2 block font-semibold text-stone-900">{{ next_state.name }}</span>
+            </a>
+        {% endif %}
+    </div>
+</nav>
+{% endif %}
+
+
+<!-- EXPLORE MORE -->
+
+<section class="bg-stone-950 py-20 text-white sm:py-24">
+    <div class="mx-auto max-w-4xl px-6 text-center lg:px-8">
+
+        <p class="text-xs font-semibold uppercase tracking-[0.25em] text-orange-400">
+            Keep exploring
         </p>
 
-    </section>
+        <h2 class="mt-4 text-4xl font-semibold tracking-tight sm:text-5xl">
+            Discover another story of India.
+        </h2>
 
+        <p class="mx-auto mt-5 max-w-2xl text-base leading-7 text-stone-400">
+            Travel across states, traditions, places and stories that make
+            India's heritage extraordinary.
+        </p>
 
-    <!-- Heritage -->
-    <section class="state-section">
+        <a
+            href="{% url 'explore' %}"
+            class="mt-8 inline-flex rounded-full bg-orange-700 px-6 py-3 text-sm font-semibold text-white transition hover:bg-orange-600"
+        >
+            Explore all states
+        </a>
 
-        <p>HERITAGE</p>
-
-        <h2>Heritage Places</h2>
-
-        {% for place in heritage_places %}
-
-            <article>
-                <h3>{{ place.name }}</h3>
-
-                {% if place.city %}
-                    <p>{{ place.city }}</p>
-                {% endif %}
-
-                <p>
-                    {{ place.short_description }}
-                </p>
-            </article>
-
-        {% empty %}
-
-            <p>No heritage places added yet.</p>
-
-        {% endfor %}
-
-    </section>
-
-
-    <!-- Festivals -->
-    <section class="state-section">
-
-        <p>TRADITIONS</p>
-
-        <h2>Festivals</h2>
-
-        {% for festival in festivals %}
-
-            <article>
-                <h3>{{ festival.name }}</h3>
-
-                <p>
-                    {{ festival.short_description }}
-                </p>
-            </article>
-
-        {% empty %}
-
-            <p>No festivals added yet.</p>
-
-        {% endfor %}
-
-    </section>
-
-
-    <!-- Arts & Crafts -->
-    <section class="state-section">
-
-        <p>ART & CRAFT</p>
-
-        <h2>Arts & Crafts</h2>
-
-        {% for art in arts_crafts %}
-
-            <article>
-                <h3>{{ art.name }}</h3>
-
-                <p>
-                    {{ art.short_description }}
-                </p>
-            </article>
-
-        {% empty %}
-
-            <p>No arts or crafts added yet.</p>
-
-        {% endfor %}
-
-    </section>
-
-
-    <!-- Food -->
-    <section class="state-section">
-
-        <p>CUISINE</p>
-
-        <h2>Food</h2>
-
-        {% for food in foods %}
-
-            <article>
-                <h3>{{ food.name }}</h3>
-
-                <p>
-                    {{ food.short_description }}
-                </p>
-            </article>
-
-        {% empty %}
-
-            <p>No food items added yet.</p>
-
-        {% endfor %}
-
-    </section>
-
-
-    <!-- Historical Events -->
-    <section class="state-section">
-
-        <p>HISTORY</p>
-
-        <h2>Historical Events</h2>
-
-        {% for event in historical_events %}
-
-            <article>
-
-                <h3>{{ event.title }}</h3>
-
-                {% if event.year %}
-                    <p>{{ event.year }}</p>
-                {% endif %}
-
-                {% if event.location %}
-                    <p>{{ event.location }}</p>
-                {% endif %}
-
-                <p>
-                    {{ event.short_description }}
-                </p>
-
-            </article>
-
-        {% empty %}
-
-            <p>No historical events added yet.</p>
-
-        {% endfor %}
-
-    </section>
-
+    </div>
 </section>
+
+
 
 {% endblock %}

@@ -3,3 +3,39 @@
 @source "../../../templates/**/*.html";
 @source "../../../core/templates/**/*.html";
 @source "../../../states/templates/**/*.html";
+
+html {
+    scroll-behavior: smooth;
+}
+
+.map-state {
+    fill: #c9bba5;
+    stroke: #f7f3eb;
+    stroke-width: 1.5;
+    cursor: pointer;
+    transition:
+        fill 200ms ease,
+        transform 200ms ease;
+}
+
+.map-state:hover {
+    fill: #c2410c;
+}
+
+.map-state:focus {
+    outline: none;
+}
+
+::selection {
+    background: #fed7aa;
+    color: #431407;
+}
+
+body {
+    overflow-x: hidden;
+}
+
+img {
+    max-width: 100%;
+}
+
